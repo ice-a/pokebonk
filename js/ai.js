@@ -6,7 +6,7 @@
    客户端配置（localStorage）：
      pb.ai.enabled  = '0'   关闭事件流（默认开启）
      pb.ai.interval = 秒数  事件间隔（服务端 AI_EVENT_INTERVAL 下发值会覆盖默认）
-     pb.ai.classic  = '1'   经典模式也启用（默认仅生存模式）
+     pb.ai.classic  = '1'   经典/生存模式也启用（无限流模式恒开）
    ============================================================ */
 (function () {
   'use strict';
@@ -70,8 +70,8 @@
   window.AIEvent = {
     tick: function (RUN, dt) {
       if (!enabled || !RUN || !window.PB) return;
-      if (RUN.mode === 'classic' && !classicToo) return;
-      if (RUN.mode !== 'classic' && RUN.mode !== 'survival') return;
+      if (RUN.mode !== 'classic' && RUN.mode !== 'survival' && RUN.mode !== 'infinite') return;
+      if (RUN.mode !== 'infinite' && !classicToo) return;
       clock += dt;
       if (clock < interval || busy) return;
       clock = 0; busy = true;

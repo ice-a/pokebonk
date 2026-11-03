@@ -370,7 +370,7 @@
     STATE = 'playing';
     showScreen(null);
     $('bossbar').classList.add('hidden');
-    banner(r.name, rgMode === 'survival' ? '生存模式 · 无限宝可梦群' : '经典模式 · 区域 1/3');
+    banner(r.name, rgMode === 'classic' ? '经典模式 · 区域 1/3' : (rgMode === 'survival' ? '生存模式 · 无限宝可梦群' : '无限流模式 · AI 异象降临'));
     sfx('confirm');
     updateHudCoins();
     render();
@@ -393,15 +393,15 @@
   }
   function buildAreaTrack() {
     var h = '';
-    if (RUN.mode === 'survival') {
+    if (RUN.mode !== 'classic') {
       h = '<div class="area-dot cur">∞</div><div class="area-dot boss">★</div>';
     } else {
       for (var i = 0; i < 3; i++) h += '<div class="area-dot ' + (i < RUN.area ? 'done' : (i === RUN.area ? 'cur' : '')) + '">' + (i + 1) + '</div>';
       h += '<div class="area-dot boss ' + (RUN.area >= 3 ? 'cur' : '') + '">圣地</div>';
     }
     $('hud-areatrack').innerHTML = h;
-    $('hud-area').textContent = RUN.mode === 'survival' ? '生存 · 无尽' :
-      (RUN.area >= 3 ? '森林圣地' : '区域 ' + (RUN.area + 1) + '/3');
+    $('hud-area').textContent = RUN.mode === 'classic' ? (RUN.area >= 3 ? '森林圣地' : '区域 ' + (RUN.area + 1) + '/3') :
+      (RUN.mode === 'survival' ? '生存 · 无尽' : '无限流 · 无尽');
   }
   function updateEvoHint() {
     var c = RUN.char, next = c.evo[RUN.player.evoStage];
@@ -752,7 +752,7 @@
       RUN.areaTimer -= dt;
       if (RUN.areaKills >= RUN.quota || RUN.areaTimer <= 0) spawnGuardian(RUN.area);
     }
-    if (RUN.mode === 'survival') {
+    if (RUN.mode !== 'classic') {
       var ms = Math.floor(RUN.elapsed / 120);
       if (ms > RUN.milestone) {
         RUN.milestone = ms;
@@ -1016,7 +1016,7 @@
     saveSave();
 
     $('over-title').textContent = win ? '胜利！' : '你倒下了！';
-    $('ob-sub').textContent = r.name + ' · ' + (RUN.mode === 'survival' ? '生存 ' + fmtTime(RUN.elapsed) : (RUN.area >= 3 ? '森林圣地' : '区域 ' + (RUN.area + 1) + '/3')) + ' · ' + diff.name;
+    $('ob-sub').textContent = r.name + ' · ' + (RUN.mode === 'classic' ? (RUN.area >= 3 ? '森林圣地' : '区域 ' + (RUN.area + 1) + '/3') : (RUN.mode === 'survival' ? '生存 ' : '无限流 ') + fmtTime(RUN.elapsed)) + ' · ' + diff.name;
     $('ob-name').textContent = c.name + (RUN.player.evoStage > 0 ? ' → ' + RUN.player.evoName : '') + ' · Lv.' + RUN.player.level;
     $('ob-avatar').innerHTML = spriteImg(c.chain[RUN.player.evoStage], '', 72);
     $('ob-chips').innerHTML =

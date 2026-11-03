@@ -3,22 +3,22 @@
 对齐 pokebonk.com 玩法的浏览器肉鸽：选人 → 选区域 → 3 区域推进 + 森林圣地终战（超梦）。
 击杀升级选卡、投球捕获入队、大招蓄力、进化链、计时奖牌、生存无尽模式，全离线可玩（图源走 PokeAPI CDN）。
 
-## 分支策略
+## 分支说明与游戏模式
 
-| 分支 | 内容 | 部署建议 |
-| --- | --- | --- |
-| `main` | 纯静态基线版（无 AI） | Vercel 生产环境 |
-| `ai-infinite` | **硅基流动 AI 无限流版**：生存模式接入 AI 世界事件（奇遇/灾变/天降/异变） | 独立 Vercel 项目，或把该分支设为 Production Branch |
+**两分支已合并**：`main` 即完整版（基线玩法 + AI 无限流），`ai-infinite` 保留为历史分支、不再单独维护。一次部署即含全部模式。
+
+| 模式 | 说明 |
+| --- | --- |
+| 经典模式 | 区域 1→3 → 森林圣地终战；守护者配额 / 倒计时推进 |
+| 生存模式 | 无限宝可梦群，每 120 秒里程碑守护者，星星沙子 +30 |
+| **无限流模式** | 生存规则 + **AI 世界事件**（奇遇/灾变/天降/异变轮番登场，硅基流动驱动；未配 Key 自动降级本地事件池） |
 
 ## Vercel 部署（约 2 分钟）
 
 1. 打开 <https://vercel.com/new> → Import Git Repository → 选择 `ice-a/pokebonk`。
 2. Framework Preset 选 **Other**；Build Command 与 Output Directory **留空**（纯静态站点，`/api` 自动识别为 Serverless Function，Node 18+）。
 3. 点 **Deploy**，得到 `https://<项目名>.vercel.app`。
-4. **部署 AI 无限流分支**（二选一）：
-   - 方式 A：同一个 Vercel 项目 → Settings → Git → **Production Branch 改为 `ai-infinite`**；
-   - 方式 B：再 Import 一次同仓库建第二个项目（如 `pokebonk-ai`），Root Directory 留空，从 `ai-infinite` 分支部署。
-   任意分支每次 push 都会自动生成 Preview 部署链接。
+4. **一次部署即含全部模式**（含无限流）；任意分支每次 push 都会自动生成 Preview 部署链接。
 5. **环境变量**：Settings → Environment Variables 按下表添加 → 修改后必须 **Redeploy** 才生效（Vercel 在部署时注入环境变量）。
 
 ## 环境变量（硅基流动 AI 配置）
@@ -60,7 +60,7 @@
 | --- | --- |
 | `pb.ai.enabled` | `'0'` 关闭 AI 事件流（默认开启） |
 | `pb.ai.interval` | 事件间隔秒数（服务端 `AI_EVENT_INTERVAL` 下发值会覆盖默认） |
-| `pb.ai.classic` | `'1'` 时经典模式也启用（默认仅生存模式） |
+| `pb.ai.classic` | `'1'` 时经典/生存模式也启用 AI 事件（无限流模式恒开） |
 
 控制台 API：`AIEvent.setEnabled(false)` / `AIEvent.setIntervalSec(20)` / `AIEvent.enableClassic(true)`。
 
@@ -78,6 +78,7 @@ npm i -g vercel && vercel dev     # 读取本地 .env（参考 .env.example）
 
 - **经典模式**：区域 1→3 → 森林圣地终战；每区域击杀配额或 10 分钟倒计时先到者触发守护者。
 - **生存模式**：无限宝可梦群，每 120 秒一个里程碑守护者，星星沙子 +30。
+- **无限流模式**：生存规则 + AI 世界事件流——奇遇（coins/heal/xp/blessing）与灾变（wave/damageAll）轮番登场，事件叙事由硅基流动实时生成。
 - **升级**：每次升级 3 选 1 强化卡；角色 Lv.24 进化（部分支持火之石分支进化）。
 - **捕获**：招球价格随通胀上涨（18→22→27…），队伍满 6 转宝可币奖励。
 - **结算**：时间/击败数/伤害/积分 + 逐技能伤害条 + 图鉴新增 + 计时奖牌（银<24:00 / 金<18:00 / 冠军<13:30）。
