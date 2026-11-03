@@ -685,3 +685,92 @@ button.big { font-size: 18px; padding: 14px 38px; border-radius: 15px; }
   .over-banner { flex-wrap: wrap; }
   .ob-chips { justify-content: flex-start; }
 }
+
+/* ============================================================
+   v3 新增：对战目标 / 上榜询问 / 排行榜 / PvP 镜像对决
+   ============================================================ */
+#target-row .mode-btn b { font-size: 13.5px; }
+
+/* ---------- 上榜询问 ---------- */
+.upload-box {
+  margin: 14px auto 0; max-width: 720px; width: calc(100% - 32px);
+  background: rgba(255,210,87,.07); border: 1px solid rgba(255,210,87,.35);
+  border-radius: 14px; padding: 14px 18px;
+}
+.upload-box.hidden { display: none; }
+.up-head { font-size: 16px; font-weight: 800; color: #ffd257; letter-spacing: .06em; margin-bottom: 4px; }
+.up-sub { font-size: 12.5px; color: #9fb0e8; margin-bottom: 10px; }
+.up-sub b { color: #fff; }
+.up-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.up-row input {
+  flex: 1 1 200px; min-width: 160px; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid rgba(160,190,255,.35); background: rgba(8,12,26,.75);
+  color: #eaf0ff; font-size: 13.5px; font-family: inherit; outline: none;
+}
+.up-row input:focus { border-color: #ffd257; box-shadow: 0 0 0 2px rgba(255,210,87,.18); }
+.up-tip { font-size: 12px; color: #8fa0d8; margin-top: 8px; min-height: 16px; }
+.up-tip.ok { color: #7ce38b; }
+.up-tip.err { color: #ff8a8a; }
+
+/* ---------- 排行榜 ---------- */
+.board-body { padding: 4px 26px 26px; display: flex; flex-direction: column; gap: 14px; }
+.board-list { display: flex; flex-direction: column; gap: 4px; }
+.lb-row {
+  display: grid; grid-template-columns: 52px 1fr 150px 96px 92px;
+  align-items: center; gap: 8px; padding: 9px 12px; border-radius: 10px;
+  background: rgba(20,28,52,.6); border: 1px solid rgba(90,120,200,.18);
+  font-size: 13px;
+}
+.lb-head { background: transparent; border: none; color: #7f90c8; font-size: 11.5px; letter-spacing: .08em; }
+.lb-row.top1 { border-color: rgba(255,210,87,.55); background: rgba(255,210,87,.10); }
+.lb-row.top2 { border-color: rgba(200,214,240,.4); background: rgba(200,214,240,.06); }
+.lb-row.top3 { border-color: rgba(214,150,90,.45); background: rgba(214,150,90,.07); }
+.lb-r { font-weight: 800; color: #ffd257; text-align: center; }
+.lb-n { color: #eaf0ff; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lb-c, .lb-m { color: #9fb0e8; font-size: 12px; }
+.lb-s { text-align: right; font-weight: 800; color: #ffe9a8; }
+.lb-loading, .lb-empty { padding: 28px 10px; text-align: center; color: #8fa0d8; font-size: 13px; }
+
+/* ---------- PvP 镜像对决 ---------- */
+.duel-wrap { padding: 20px 26px 26px; display: flex; flex-direction: column; gap: 14px; max-width: 980px; margin: 0 auto; width: 100%; }
+.duel-head h1 { font-size: 26px; letter-spacing: .1em; }
+.duel-head .dim { color: #8fa0d8; font-size: 12.5px; margin-top: 4px; }
+.duel-stage { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.duel-side { flex: 1 1 0; min-width: 0; }
+.duel-vs { font-size: 22px; font-weight: 900; color: #ffd257; letter-spacing: .12em; opacity: .8; }
+.ds-card {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px;
+  background: rgba(20,28,52,.72); border: 1px solid rgba(90,120,200,.28);
+}
+.ds-card.mine { border-color: rgba(120,220,180,.45); }
+.ds-card.rival { border-color: rgba(255,120,120,.4); }
+.ds-avatar { width: 56px; height: 56px; display: grid; place-items: center; }
+.ds-avatar img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.ds-info { flex: 1 1 0; min-width: 0; }
+.ds-name { font-size: 14px; font-weight: 700; color: #eaf0ff; }
+.ds-lv { font-size: 11px; color: #ffd257; }
+.ds-type { display: inline-block; font-size: 10.5px; padding: 1px 7px; border-radius: 999px; margin: 3px 0 6px; color: #dfe8ff; }
+.duel-log {
+  height: 220px; overflow-y: auto; padding: 12px 14px; border-radius: 14px;
+  background: rgba(6,10,22,.72); border: 1px solid rgba(90,120,200,.22);
+  font-size: 12.5px; line-height: 1.7; color: #c9d6f5;
+}
+.dl-line { padding: 1px 0; }
+.dl-line.me { color: #a8ffd0; }
+.dl-line.foe { color: #ffb3b3; }
+.dl-r { display: inline-block; min-width: 34px; color: #6e80b8; font-size: 11px; }
+.dl-me, .dl-foe { font-weight: 700; }
+.dl-eff.good { color: #ffd257; font-weight: 700; }
+.dl-eff.weak { color: #8fa0d8; }
+.dl-end { display: block; margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(120,150,220,.3); font-size: 14px; font-weight: 800; color: #ffd257; }
+.dl-ok { display: block; margin-top: 6px; color: #7ce38b; }
+.duel-foot { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+@media (max-width: 720px) {
+  .duel-stage { flex-direction: column; }
+  .duel-wrap { padding: 14px; }
+  .board-body { padding: 4px 14px 20px; }
+  .lb-row { grid-template-columns: 38px 1fr 84px; }
+  .lb-row .lb-c, .lb-row .lb-m { display: none; }
+  .duel-log { height: 170px; }
+}

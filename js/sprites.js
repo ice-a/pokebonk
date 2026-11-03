@@ -20,7 +20,14 @@
     marowak: 105, hitmonlee: 106, rhydon: 112, starmie: 121, jynx: 122, scyther: 123,
     electabuzz: 125, pinsir: 127, magikarp: 129, gyarados: 130, lapras: 131,
     eevee: 133, vaporeon: 134, aerodactyl: 142, snorlax: 143, articuno: 144,
-    zapdos: 145, dragonite: 149, mewtwo: 150, walrein: 365
+    zapdos: 145, dragonite: 149, mewtwo: 150, walrein: 365,
+    /* v3 扩充：新增可玩角色与野生池 */
+    gastly: 92, haunter: 93, gengar: 94, machoke: 67, abra: 63, kadabra: 64,
+    dratini: 147, dragonair: 148, graveler: 75, vulpix: 37, ninetales: 38,
+    clefairy: 35, clefable: 36, scizor: 212, koffing: 109, weezing: 110,
+    magnemite: 81, magneton: 82, pidgeotto: 17, pidgeot: 18,
+    houndour: 228, houndoom: 229, ekans: 23, bellsprout: 69, poliwag: 60,
+    voltorb: 100, cubone: 104, staryu: 120, spearow: 21, mankey: 56
   };
 
   function srcFor(id, shiny) {

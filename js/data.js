@@ -73,7 +73,69 @@
     slam:       { name: '拍击',     kind: '旋转', cat: '物理', type: 'normal', unlockLv: 1, dmg: 20, cd: 1.3, radius: 3, desc: '抡起巨掌拍飞周围敌人。' },
     yawn:       { name: '哈欠',     kind: '光环', cat: '特殊', type: 'normal', unlockLv: 2, dmg: 8, cd: 2, radius: 5, desc: '打个大哈欠，让周围敌人昏昏欲睡。' },
     bodyslam:   { name: '压扁',     kind: '弹丸', cat: '物理', type: 'normal', unlockLv: 4, dmg: 24, cd: 2.2, range: 6, pierce: 0, desc: '泰山压顶砸向前方。' },
-    explosion:  { name: '大爆炸',   kind: '光束', cat: '特殊', type: 'normal', unlockLv: 7, dmg: 42, cd: 4.2, range: 18, pierce: 1, desc: '以自身为中心引爆冲击波。' }
+    explosion:  { name: '大爆炸',   kind: '光束', cat: '特殊', type: 'normal', unlockLv: 7, dmg: 42, cd: 4.2, range: 18, pierce: 1, desc: '以自身为中心引爆冲击波。' },
+    /* —— 幽灵 —— */
+    lick:        { name: '舔舌头',   kind: '弹丸', cat: '物理', type: 'ghost', unlockLv: 1, dmg: 16, cd: 0.8, range: 12, pierce: 0, desc: '用长舌头舔舐最近的敌人。' },
+    shadowclaw:  { name: '暗影爪',   kind: '连射', cat: '物理', type: 'ghost', unlockLv: 2, dmg: 9, shots: 3, cd: 0.85, range: 13, pierce: 0.2, desc: '以暗影之爪连抓三次。' },
+    hex:         { name: '祸不单行', kind: '光环', cat: '特殊', type: 'ghost', unlockLv: 4, dmg: 11, cd: 2, radius: 5.5, desc: '诅咒周围敌人，持续吸取它们的生命。' },
+    shadowball:  { name: '暗影球',   kind: '弹丸', cat: '特殊', type: 'ghost', unlockLv: 7, dmg: 32, cd: 2.4, range: 18, pierce: 0.4, desc: '投出凝聚怨念的暗影球。' },
+    /* —— 格斗 —— */
+    karatechop:  { name: '空手劈',   kind: '弹丸', cat: '物理', type: 'fighting', unlockLv: 1, dmg: 17, cd: 0.75, range: 11, pierce: 0, desc: '蓄力一记手刀劈向敌人。' },
+    lowkick:     { name: '踢倒',     kind: '旋转', cat: '物理', type: 'fighting', unlockLv: 2, dmg: 13, cd: 1.1, radius: 3.2, desc: '扫堂腿踢翻周围所有敌人。' },
+    crosschop:   { name: '十字劈',   kind: '连射', cat: '物理', type: 'fighting', unlockLv: 4, dmg: 12, shots: 3, cd: 1.05, range: 12, pierce: 0.3, desc: '双掌交叉，连击前方敌人。' },
+    closecombat: { name: '近身战',   kind: '光束', cat: '物理', type: 'fighting', unlockLv: 7, dmg: 26, cd: 2.6, range: 10, pierce: 1, desc: '贴身爆发全力一击。' },
+    /* —— 超能力 —— */
+    confusion:   { name: '念力',     kind: '弹丸', cat: '特殊', type: 'psychic', unlockLv: 1, dmg: 16, cd: 0.8, range: 18, pierce: 0.15, desc: '用念力震荡最近敌人的意识。' },
+    psybeam:     { name: '幻象光线', kind: '光束', cat: '特殊', type: 'psychic', unlockLv: 2, dmg: 11, cd: 1.5, range: 16, pierce: 1, desc: '射出扭曲现实的光线。' },
+    psychicwave: { name: '精神强念', kind: '连射', cat: '特殊', type: 'psychic', unlockLv: 4, dmg: 10, shots: 3, cd: 1.0, range: 17, pierce: 0.35, desc: '连续投掷精神冲击。' },
+    futuresight: { name: '预知未来', kind: '弹丸', cat: '特殊', type: 'psychic', unlockLv: 7, dmg: 38, cd: 3.2, range: 22, pierce: 0.5, desc: '预言敌人的终局，届时一击落下。' },
+    /* —— 地面 —— */
+    mudshot:     { name: '泥巴射击', kind: '弹丸', cat: '特殊', type: 'ground', unlockLv: 1, dmg: 15, cd: 0.75, range: 15, pierce: 0.2, desc: '射出泥块减速敌人。' },
+    bulldoze:    { name: '重踏',     kind: '旋转', cat: '物理', type: 'ground', unlockLv: 2, dmg: 14, cd: 1.2, radius: 3.4, desc: '践踏大地，震退周围敌人。' },
+    earthquake:  { name: '地震',     kind: '光环', cat: '物理', type: 'ground', unlockLv: 7, dmg: 30, cd: 3, radius: 7, desc: '引发地裂，全场敌人承受冲击。' },
+    /* —— 岩石 —— */
+    rockthrow:   { name: '落石',     kind: '弹丸', cat: '物理', type: 'rock', unlockLv: 1, dmg: 18, cd: 0.9, range: 16, pierce: 0, desc: '举起石块砸向敌人。' },
+    rockblast:   { name: '岩石爆击', kind: '连射', cat: '物理', type: 'rock', unlockLv: 2, dmg: 7, shots: 4, cd: 1.0, range: 15, pierce: 0.2, desc: '连续弹射碎石。' },
+    stoneedge:   { name: '尖石攻击', kind: '光束', cat: '物理', type: 'rock', unlockLv: 7, dmg: 28, cd: 2.8, range: 18, pierce: 1, desc: '从地下刺出锐利岩柱。' },
+    /* —— 冰 —— */
+    powdersnow:  { name: '粉雪',     kind: '弹丸', cat: '特殊', type: 'ice', unlockLv: 1, dmg: 15, cd: 0.75, range: 16, pierce: 0.1, desc: '吹出寒冷雪粉。' },
+    icywind:     { name: '冰冻之风', kind: '连射', cat: '特殊', type: 'ice', unlockLv: 2, dmg: 8, shots: 3, cd: 0.9, range: 16, pierce: 0.3, desc: '寒风连击并减速敌人。' },
+    icebeam:     { name: '冰冻光束', kind: '光束', cat: '特殊', type: 'ice', unlockLv: 4, dmg: 15, cd: 1.9, range: 16, pierce: 1, desc: '射出绝对零度的光束。' },
+    blizzard:    { name: '暴风雪',   kind: '光环', cat: '特殊', type: 'ice', unlockLv: 7, dmg: 34, cd: 3.6, radius: 6.5, desc: '召唤暴风雪横扫四周。' },
+    /* —— 龙 —— */
+    twister:     { name: '龙卷风',   kind: '弹丸', cat: '特殊', type: 'dragon', unlockLv: 1, dmg: 16, cd: 0.8, range: 16, pierce: 0.3, desc: '卷起龙之旋风。' },
+    dragonbreath:{ name: '龙息',     kind: '光束', cat: '特殊', type: 'dragon', unlockLv: 2, dmg: 11, cd: 1.6, range: 15, pierce: 1, desc: '喷出灼热的龙息。' },
+    dragonrush:  { name: '龙之俯冲', kind: '连射', cat: '物理', type: 'dragon', unlockLv: 4, dmg: 14, shots: 2, cd: 1.4, range: 14, pierce: 0.4, desc: '俯冲撞击并连击。' },
+    outrage:     { name: '逆鳞',     kind: '旋转', cat: '物理', type: 'dragon', unlockLv: 7, dmg: 38, cd: 3.4, radius: 4.2, desc: '陷入暴走，碾碎身边一切。' },
+    /* —— 恶 —— */
+    feintattack: { name: '出奇一击', kind: '弹丸', cat: '物理', type: 'dark', unlockLv: 1, dmg: 17, cd: 0.8, range: 14, pierce: 0.1, desc: '悄然接近后重击敌人。' },
+    snarl:       { name: '大声咆哮', kind: '光环', cat: '特殊', type: 'dark', unlockLv: 2, dmg: 12, cd: 1.8, radius: 5, desc: '咆哮削弱周围敌人。' },
+    darkpulse:   { name: '恶之波动', kind: '光束', cat: '特殊', type: 'dark', unlockLv: 7, dmg: 30, cd: 2.9, range: 18, pierce: 1, desc: '释放充满恶意的波动。' },
+    /* —— 妖精 —— */
+    fairywind:   { name: '妖精之风', kind: '弹丸', cat: '特殊', type: 'fairy', unlockLv: 1, dmg: 14, cd: 0.7, range: 15, pierce: 0.15, desc: '吹出带魔力的微风。' },
+    playrough:   { name: '嬉闹',     kind: '连射', cat: '物理', type: 'fairy', unlockLv: 2, dmg: 11, shots: 3, cd: 1.0, range: 12, pierce: 0, desc: '撒欢式连击敌人。' },
+    dazzlinggleam:{ name: '魔法闪耀', kind: '光环', cat: '特殊', type: 'fairy', unlockLv: 4, dmg: 16, cd: 2, radius: 5.5, desc: '爆出刺眼闪光伤害四周。' },
+    moonblast:   { name: '月亮之力', kind: '光束', cat: '特殊', type: 'fairy', unlockLv: 7, dmg: 30, cd: 2.9, range: 18, pierce: 1, desc: '借月亮之力射出光束。' },
+    /* —— 毒 —— */
+    poisonsting: { name: '毒针',     kind: '弹丸', cat: '物理', type: 'poison', unlockLv: 1, dmg: 14, cd: 0.65, range: 16, pierce: 0.1, desc: '射出带毒的细针。' },
+    acid:        { name: '溶解液',   kind: '光束', cat: '特殊', type: 'poison', unlockLv: 2, dmg: 10, cd: 1.6, range: 12, pierce: 1, desc: '喷出腐蚀性液体。' },
+    sludgebomb:  { name: '污泥炸弹', kind: '连射', cat: '特殊', type: 'poison', unlockLv: 7, dmg: 20, shots: 2, cd: 2.2, range: 16, pierce: 0.4, desc: '抛掷污泥炸弹连续爆炸。' },
+    /* —— 钢 —— */
+    gyroball:    { name: '陀螺球',   kind: '旋转', cat: '物理', type: 'steel', unlockLv: 2, dmg: 13, cd: 1.1, radius: 3.3, desc: '高速旋转撞击周围敌人。' },
+    flashcannon: { name: '加农光炮', kind: '光束', cat: '特殊', type: 'steel', unlockLv: 7, dmg: 29, cd: 2.9, range: 18, pierce: 1, desc: '发射聚焦的钢铁光束。' },
+    /* —— 虫 —— */
+    bugbite:     { name: '虫咬',     kind: '弹丸', cat: '物理', type: 'bug', unlockLv: 1, dmg: 15, cd: 0.7, range: 13, pierce: 0, desc: '扑上去撕咬敌人。' },
+    xscissor:    { name: '十字剪',   kind: '连射', cat: '物理', type: 'bug', unlockLv: 2, dmg: 10, shots: 3, cd: 0.95, range: 14, pierce: 0.3, desc: '以双刃交叉连斩。' },
+    megahorn:    { name: '超级角击', kind: '光束', cat: '物理', type: 'bug', unlockLv: 7, dmg: 33, cd: 3.2, range: 16, pierce: 1, desc: '全力突刺的巨大角击。' },
+    /* —— 飞行 —— */
+    gust:        { name: '起风',     kind: '弹丸', cat: '特殊', type: 'flying', unlockLv: 1, dmg: 14, cd: 0.7, range: 16, pierce: 0.2, desc: '掀起气流轰击敌人。' },
+    wingattack:  { name: '翅膀攻击', kind: '连射', cat: '物理', type: 'flying', unlockLv: 2, dmg: 9, shots: 3, cd: 0.85, range: 13, pierce: 0, desc: '双翼连续拍击。' },
+    airslash:    { name: '空气斩',   kind: '光束', cat: '特殊', type: 'flying', unlockLv: 7, dmg: 26, cd: 2.5, range: 20, pierce: 1, desc: '挥出真空刃切开敌人。' },
+    /* —— 4 级补充（补齐角色卡 1/2/4/7 节奏） —— */
+    rocktomb:    { name: '岩石封锁', kind: '光环', cat: '物理', type: 'rock', unlockLv: 4, dmg: 15, cd: 2.2, radius: 4.5, desc: '砸下巨石封住四周，压碎敌人。' },
+    sandtomb:    { name: '流沙地狱', kind: '光环', cat: '物理', type: 'ground', unlockLv: 4, dmg: 14, cd: 2.3, radius: 4.5, desc: '让地面变成流沙，把敌人拖入其中。' },
+    aerialace:   { name: '燕返',     kind: '连射', cat: '物理', type: 'flying', unlockLv: 4, dmg: 12, shots: 3, cd: 1.0, range: 15, pierce: 0.4, desc: '以极快速度来回穿刺，必中。' },
+    crunch:      { name: '咬碎',     kind: '弹丸', cat: '物理', type: 'dark', unlockLv: 4, dmg: 19, cd: 1.9, range: 13, pierce: 0.2, desc: '用尖牙撕咬，削减敌人防御。' }
   };
 
   /* ============================================================
@@ -147,6 +209,161 @@
       ultimate: { name: '大爆炸', desc: '以自己为中心引爆，毁灭周围一切（自己不会倒下）。' },
       chart: { weak: ['fighting'], resist: [], strong: [] },
       evo: []
+    },
+    /* ============ v3 扩充角色（14 张） ============ */
+    {
+      id: 'gastly', num: '#092', name: '鬼斯', type: 'ghost', role: '控场', rarity: '稀有',
+      sprite: 'gastly', chain: ['gastly', 'haunter', 'gengar'],
+      base: { hp: 30, atk: 35, def: 30, spa: 100, spd: 35, spe: 80 },
+      run: { maxHp: 86, armor: 12, dodge: 0.12, speedMul: 1.16, physMul: 0.96, specMul: 1.12, regen: 0.2, crit: 0.10 },
+      passive: { name: '漂浮', desc: '闪避 +4%，特殊伤害 +8%。' },
+      moves: ['lick', 'shadowclaw', 'hex', 'shadowball'],
+      ultimate: { name: '黑夜魔影', desc: '拉下夜幕，无数怨念之手从地面伸出，撕扯全场敌人。' },
+      chart: { weak: ['psychic', 'ghost', 'dark'], resist: ['bug', 'poison', 'normal', 'fighting'], strong: ['psychic', 'ghost'] },
+      evo: [{ at: 24, name: '鬼斯通' }, { at: 44, name: '耿鬼' }]
+    },
+    {
+      id: 'machop', num: '#066', name: '腕力', type: 'fighting', role: '攻击者', rarity: '普通',
+      sprite: 'machop', chain: ['machop', 'machoke', 'machamp'],
+      base: { hp: 70, atk: 80, def: 50, spa: 35, spd: 35, spe: 35 },
+      run: { maxHp: 150, armor: 24, dodge: 0.05, speedMul: 1.02, physMul: 1.12, specMul: 0.94, regen: 0.4, crit: 0.09 },
+      passive: { name: '毅力', desc: '物理伤害 +8%。受伤后 3 秒内物理伤害再 +20%。' },
+      moves: ['karatechop', 'lowkick', 'crosschop', 'closecombat'],
+      ultimate: { name: '爆裂拳', desc: '连续四记重拳砸向地面，冲击波扩散撕碎周围敌人。' },
+      chart: { weak: ['psychic', 'flying', 'fairy'], resist: ['rock', 'bug', 'dark'], strong: ['normal', 'ice', 'rock', 'dark', 'steel'] },
+      evo: [{ at: 24, name: '豪力' }, { at: 44, name: '怪力' }]
+    },
+    {
+      id: 'abra', num: '#063', name: '凯西', type: 'psychic', role: '爆发', rarity: '稀有',
+      sprite: 'abra', chain: ['abra', 'kadabra', 'alakazam'],
+      base: { hp: 25, atk: 20, def: 15, spa: 105, spd: 55, spe: 90 },
+      run: { maxHp: 78, armor: 10, dodge: 0.14, speedMul: 1.20, physMul: 0.90, specMul: 1.16, regen: 0.2, crit: 0.08 },
+      passive: { name: '同步', desc: '特殊伤害 +10%。血量越低闪避越高（最多 +8%）。' },
+      moves: ['confusion', 'psybeam', 'psychicwave', 'futuresight'],
+      ultimate: { name: '精神强袭', desc: '瞬间移动并把全部念力灌入一点，引发覆盖全场的空间扭曲。' },
+      chart: { weak: ['bug', 'ghost', 'dark'], resist: ['fighting', 'psychic'], strong: ['fighting', 'poison'] },
+      evo: [{ at: 24, name: '勇基拉' }, { at: 44, name: '胡地' }]
+    },
+    {
+      id: 'dratini', num: '#147', name: '迷你龙', type: 'dragon', role: '成长', rarity: '稀有',
+      sprite: 'dratini', chain: ['dratini', 'dragonair', 'dragonite'],
+      base: { hp: 41, atk: 64, def: 45, spa: 50, spd: 50, spe: 50 },
+      run: { maxHp: 118, armor: 20, dodge: 0.06, speedMul: 1.06, physMul: 1.05, specMul: 1.04, regen: 0.6, crit: 0.08 },
+      passive: { name: '神秘鳞片', desc: '受到伤害 -8%。每次升级额外 +6 最大HP。' },
+      moves: ['twister', 'dragonbreath', 'dragonrush', 'outrage'],
+      ultimate: { name: '逆鳞爆发', desc: '龙鳞炸张，旋转龙卷裹住自身，把周围敌人卷入风暴中心撕碎。' },
+      chart: { weak: ['ice', 'dragon', 'fairy'], resist: ['fire', 'water', 'grass', 'electric'], strong: ['dragon'] },
+      evo: [{ at: 24, name: '哈克龙' }, { at: 44, name: '快龙' }]
+    },
+    {
+      id: 'geodude', num: '#074', name: '小拳石', type: 'rock', role: '防御者', rarity: '普通',
+      sprite: 'geodude', chain: ['geodude', 'graveler', 'golem'],
+      base: { hp: 40, atk: 80, def: 100, spa: 30, spd: 30, spe: 20 },
+      run: { maxHp: 142, armor: 32, dodge: 0.02, speedMul: 0.92, physMul: 1.10, specMul: 0.92, regen: 0.3, crit: 0.05 },
+      passive: { name: '坚硬岩石', desc: '护甲 +14。受到物理伤害 -6%。' },
+      moves: ['rockthrow', 'rockblast', 'rocktomb', 'stoneedge'],
+      ultimate: { name: '岩石爆破', desc: '猛地砸向地面，一圈岩柱从脚下爆开，把敌人全部顶飞。' },
+      chart: { weak: ['water', 'grass', 'fighting', 'ground', 'steel'], resist: ['normal', 'fire', 'poison', 'flying'], strong: ['fire', 'ice', 'flying', 'bug'] },
+      evo: [{ at: 24, name: '隆隆石' }, { at: 44, name: '隆隆岩' }]
+    },
+    {
+      id: 'sandshrew', num: '#027', name: '穿山鼠', type: 'ground', role: '防御者', rarity: '普通',
+      sprite: 'sandshrew', chain: ['sandshrew', 'sandslash'],
+      base: { hp: 50, atk: 75, def: 85, spa: 20, spd: 30, spe: 40 },
+      run: { maxHp: 136, armor: 28, dodge: 0.05, speedMul: 1.05, physMul: 1.08, specMul: 0.94, regen: 0.4, crit: 0.07 },
+      passive: { name: '沙隐', desc: '闪避 +5%。沙地移动速度 +8%。' },
+      moves: ['mudshot', 'bulldoze', 'sandtomb', 'earthquake'],
+      ultimate: { name: '沙暴突袭', desc: '卷成沙球高速滚动，沿途掀起沙暴，碾碎路径上的一切。' },
+      chart: { weak: ['water', 'grass', 'ice'], resist: ['poison', 'rock', 'electric'], strong: ['fire', 'electric', 'poison', 'rock', 'steel'] },
+      evo: [{ at: 24, name: '穿山王' }]
+    },
+    {
+      id: 'vulpix', num: '#037', name: '六尾', type: 'fire', role: '速攻手', rarity: '普通',
+      sprite: 'vulpix', chain: ['vulpix', 'ninetales'],
+      base: { hp: 38, atk: 41, def: 40, spa: 50, spd: 65, spe: 65 },
+      run: { maxHp: 96, armor: 16, dodge: 0.08, speedMul: 1.10, physMul: 0.98, specMul: 1.10, regen: 0.4, crit: 0.08 },
+      passive: { name: '引火', desc: '火系伤害 +10%。受到火系伤害减半。' },
+      moves: ['ember', 'flamewheel', 'flamethrower', 'fireblast'],
+      ultimate: { name: '炼狱', desc: '六条尾巴同时燃起，把四周烧成火海，持续灼烧所有敌人。' },
+      chart: { weak: ['water', 'ground', 'rock'], resist: ['fire', 'grass', 'ice', 'bug', 'steel', 'fairy'], strong: ['grass', 'ice', 'bug', 'steel'] },
+      evo: [{ at: 24, name: '九尾' }]
+    },
+    {
+      id: 'seel', num: '#086', name: '小海狮', type: 'ice', role: '辅助', rarity: '普通',
+      sprite: 'seel', chain: ['seel', 'dewgong'],
+      base: { hp: 65, atk: 45, def: 55, spa: 45, spd: 70, spe: 45 },
+      run: { maxHp: 150, armor: 24, dodge: 0.06, speedMul: 1.02, physMul: 1.00, specMul: 1.08, regen: 0.7, crit: 0.06 },
+      passive: { name: '冰之躯体', desc: '护甲 +8，冰系伤害 +8%。' },
+      moves: ['powdersnow', 'icywind', 'icebeam', 'blizzard'],
+      ultimate: { name: '极寒暴风', desc: '唤起暴风雪，冰晶在空中炸裂，冻结并击碎全场敌人。' },
+      chart: { weak: ['electric', 'grass', 'fighting', 'rock', 'steel'], resist: ['ice'], strong: ['grass', 'ground', 'flying', 'dragon'] },
+      evo: [{ at: 24, name: '白海狮' }]
+    },
+    {
+      id: 'clefairy', num: '#035', name: '皮皮', type: 'fairy', role: '辅助', rarity: '稀有',
+      sprite: 'clefairy', chain: ['clefairy', 'clefable'],
+      base: { hp: 70, atk: 45, def: 48, spa: 60, spd: 65, spe: 35 },
+      run: { maxHp: 160, armor: 22, dodge: 0.07, speedMul: 1.00, physMul: 1.02, specMul: 1.08, regen: 0.9, crit: 0.07 },
+      passive: { name: '魔法守护', desc: '回复 +0.6/s。受到特殊伤害 -8%。' },
+      moves: ['fairywind', 'playrough', 'dazzlinggleam', 'moonblast'],
+      ultimate: { name: '月亮之歌', desc: '月光倾泻，治愈自身并把星光化作冲击波扫过全场。' },
+      chart: { weak: ['poison', 'steel'], resist: ['fighting', 'bug', 'dark'], strong: ['fighting', 'dragon', 'dark'] },
+      evo: [{ at: 24, name: '皮可西' }]
+    },
+    {
+      id: 'scyther', num: '#123', name: '飞天螳螂', type: 'bug', role: '速攻手', rarity: '稀有',
+      sprite: 'scyther', chain: ['scyther', 'scizor'],
+      base: { hp: 70, atk: 110, def: 80, spa: 55, spd: 80, spe: 105 },
+      run: { maxHp: 132, armor: 22, dodge: 0.10, speedMul: 1.18, physMul: 1.12, specMul: 0.96, regen: 0.3, crit: 0.13 },
+      passive: { name: '技术高手', desc: '物理伤害 +8%，暴击率 +4%。' },
+      moves: ['bugbite', 'xscissor', 'aerialace', 'megahorn'],
+      ultimate: { name: '双刃斩', desc: '化作残影高速穿梭，镰刀连斩全场敌人，最后交叉一刀收尾。' },
+      chart: { weak: ['fire', 'flying', 'rock'], resist: ['grass', 'fighting', 'bug'], strong: ['grass', 'psychic', 'dark'] },
+      evo: [{ at: 30, name: '巨钳螳螂' }]
+    },
+    {
+      id: 'koffing', num: '#109', name: '瓦斯弹', type: 'poison', role: '防御者', rarity: '普通',
+      sprite: 'koffing', chain: ['koffing', 'weezing'],
+      base: { hp: 40, atk: 65, def: 95, spa: 60, spd: 45, spe: 35 },
+      run: { maxHp: 128, armor: 26, dodge: 0.04, speedMul: 0.98, physMul: 1.02, specMul: 1.06, regen: 0.4, crit: 0.06 },
+      passive: { name: '浮游', desc: '免疫地面属性伤害。毒系伤害 +6%。' },
+      moves: ['poisonsting', 'acid', 'hex', 'sludgebomb'],
+      ultimate: { name: '毒气爆发', desc: '外壳破裂，毒雾以自身为中心爆炸扩散，持续腐蚀全场敌人。' },
+      chart: { weak: ['psychic', 'ground'], resist: ['grass', 'fighting', 'poison', 'bug', 'fairy'], strong: ['grass', 'fairy'] },
+      evo: [{ at: 24, name: '双弹瓦斯' }]
+    },
+    {
+      id: 'magnemite', num: '#081', name: '小磁怪', type: 'steel', role: '输出', rarity: '普通',
+      sprite: 'magnemite', chain: ['magnemite', 'magneton'],
+      base: { hp: 25, atk: 35, def: 70, spa: 95, spd: 55, spe: 45 },
+      run: { maxHp: 92, armor: 30, dodge: 0.05, speedMul: 1.00, physMul: 0.94, specMul: 1.12, regen: 0.2, crit: 0.08 },
+      passive: { name: '磁力', desc: '特殊伤害 +8%，护甲 +10。' },
+      moves: ['thundershock', 'gyroball', 'thunderbolt', 'flashcannon'],
+      ultimate: { name: '电磁炮', desc: '把两侧磁铁的全部能量压进一发炮弹，贯穿路径上所有敌人。' },
+      chart: { weak: ['fire', 'fighting', 'ground'], resist: ['normal', 'grass', 'ice', 'flying', 'psychic', 'bug', 'rock', 'dragon', 'steel', 'fairy'], strong: ['ice', 'rock', 'fairy'] },
+      evo: [{ at: 24, name: '三合一磁怪' }]
+    },
+    {
+      id: 'pidgey', num: '#016', name: '波波', type: 'flying', role: '速攻手', rarity: '普通',
+      sprite: 'pidgey', chain: ['pidgey', 'pidgeotto', 'pidgeot'],
+      base: { hp: 40, atk: 45, def: 40, spa: 35, spd: 35, spe: 56 },
+      run: { maxHp: 100, armor: 16, dodge: 0.10, speedMul: 1.20, physMul: 1.04, specMul: 1.00, regen: 0.3, crit: 0.10 },
+      passive: { name: '锐利目光', desc: '暴击率 +3%，移动速度 +5%。' },
+      moves: ['gust', 'wingattack', 'aerialace', 'airslash'],
+      ultimate: { name: '神鸟猛击', desc: '冲上高空后俯冲，携风压贯穿全场，落地掀起气浪。' },
+      chart: { weak: ['electric', 'ice', 'rock'], resist: ['grass', 'fighting', 'bug'], strong: ['grass', 'fighting', 'bug'] },
+      evo: [{ at: 20, name: '比比鸟' }, { at: 40, name: '大比鸟' }]
+    },
+    {
+      id: 'houndour', num: '#228', name: '戴鲁比', type: 'dark', role: '爆发', rarity: '稀有',
+      sprite: 'houndour', chain: ['houndour', 'houndoom'],
+      base: { hp: 45, atk: 60, def: 30, spa: 80, spd: 50, spe: 65 },
+      run: { maxHp: 108, armor: 16, dodge: 0.09, speedMul: 1.12, physMul: 1.02, specMul: 1.10, regen: 0.3, crit: 0.10 },
+      passive: { name: '引火恶犬', desc: '恶系伤害 +10%。击败敌人后回复 4% 最大HP。' },
+      moves: ['feintattack', 'snarl', 'crunch', 'darkpulse'],
+      ultimate: { name: '地狱火', desc: '喷出黑色的地狱之焰，沿地面蔓延，将敌人拖入灼烧深渊。' },
+      chart: { weak: ['fighting', 'ground', 'water', 'rock'], resist: ['ghost', 'dark'], strong: ['psychic', 'ghost'] },
+      evo: [{ at: 24, name: '黑鲁加' }]
     }
   ];
 
@@ -230,7 +447,21 @@
     { id: 'machop', name: '腕力', type: 'fighting', hp: 40, atk: 16, spd: 1.6, xp: 6, sprite: 'machop', size: 20 },
     { id: 'shellder', name: '大舌贝', type: 'ice', hp: 38, atk: 13, spd: 1.3, xp: 5, sprite: 'shellder', size: 18 },
     { id: 'drowzee', name: '呆呆兽', type: 'psychic', hp: 34, atk: 12, spd: 1.5, xp: 5, sprite: 'drowzee', size: 19 },
-    { id: 'seel', name: '小海狮', type: 'ice', hp: 36, atk: 12, spd: 1.5, xp: 5, sprite: 'seel', size: 19 }
+    { id: 'seel', name: '小海狮', type: 'ice', hp: 36, atk: 12, spd: 1.5, xp: 5, sprite: 'seel', size: 19 },
+    /* v3 扩充野生池 */
+    { id: 'gastly', name: '鬼斯', type: 'ghost', hp: 26, atk: 12, spd: 1.8, xp: 4, sprite: 'gastly', size: 18 },
+    { id: 'abra', name: '凯西', type: 'psychic', hp: 22, atk: 13, spd: 2.0, xp: 5, sprite: 'abra', size: 17 },
+    { id: 'ekans', name: '阿柏蛇', type: 'poison', hp: 30, atk: 13, spd: 1.7, xp: 4, sprite: 'ekans', size: 19 },
+    { id: 'bellsprout', name: '喇叭芽', type: 'grass', hp: 30, atk: 12, spd: 1.4, xp: 4, sprite: 'bellsprout', size: 18 },
+    { id: 'poliwag', name: '蚊香蝌蚪', type: 'water', hp: 28, atk: 11, spd: 1.7, xp: 4, sprite: 'poliwag', size: 17 },
+    { id: 'voltorb', name: '霹雳电球', type: 'electric', hp: 30, atk: 12, spd: 2.2, xp: 5, sprite: 'voltorb', size: 18 },
+    { id: 'cubone', name: '卡拉卡拉', type: 'ground', hp: 38, atk: 15, spd: 1.6, xp: 6, sprite: 'cubone', size: 19 },
+    { id: 'koffing', name: '瓦斯弹', type: 'poison', hp: 34, atk: 12, spd: 1.5, xp: 5, sprite: 'koffing', size: 19 },
+    { id: 'staryu', name: '海星星', type: 'water', hp: 32, atk: 13, spd: 2.0, xp: 5, sprite: 'staryu', size: 18 },
+    { id: 'houndour', name: '戴鲁比', type: 'dark', hp: 36, atk: 15, spd: 2.1, xp: 6, sprite: 'houndour', size: 19 },
+    { id: 'magnemite', name: '小磁怪', type: 'electric', hp: 30, atk: 12, spd: 1.9, xp: 5, sprite: 'magnemite', size: 18 },
+    { id: 'spearow', name: '烈雀', type: 'flying', hp: 26, atk: 12, spd: 2.4, xp: 4, sprite: 'spearow', size: 17 },
+    { id: 'mankey', name: '猴怪', type: 'fighting', hp: 34, atk: 15, spd: 2.0, xp: 5, sprite: 'mankey', size: 19 }
   ];
 
   /* Boss / 守护者：hp 放大 atk 接触伤害 spd 移速 r 体型 */
@@ -256,6 +487,7 @@
     aerodactyl: { name: '化石翼龙', type: 'rock', hp: 1350, atk: 33, spd: 3.0, r: 40, sprite: 'aerodactyl' },
     tentacruel: { name: '毒刺水母', type: 'poison', hp: 1250, atk: 28, spd: 2.5, r: 40, sprite: 'tentacruel' },
     gyarados:   { name: '暴鲤龙', type: 'water', hp: 1600, atk: 36, spd: 2.4, r: 44, sprite: 'gyarados' },
+    lanturn:    { name: '电灯怪', type: 'water', hp: 1250, atk: 29, spd: 2.6, r: 38, sprite: 'lanturn' },
     lapras:     { name: '拉普拉斯', type: 'ice', hp: 1450, atk: 30, spd: 2.2, r: 42, sprite: 'lapras' },
     dodrio:     { name: '嘟嘟利', type: 'flying', hp: 1100, atk: 30, spd: 3.1, r: 35, sprite: 'dodrio' },
     dewgong:    { name: '白海狮', type: 'ice', hp: 1300, atk: 29, spd: 2.3, r: 40, sprite: 'dewgong' },
@@ -287,6 +519,23 @@
     { id: 'catch',  name: '精灵球手', desc: '捕获率 +18%', icon: '🎯', apply: function (p) { p.catchBonus += 0.18; } }
   ];
 
+  /* ============================================================
+     PvP 镜像对手池：排行榜为空时的内置对手（玩家离线也能 PvP）
+     char / level 决定强度，title 是展示称号
+     ============================================================ */
+  var PVP_RIVALS = [
+    { name: '青空训练家', char: 'pikachu', level: 18, title: '疾风三连' },
+    { name: '深岩老手', char: 'snorlax', level: 22, title: '厚壁铁壁' },
+    { name: '霜语旅人', char: 'seel', level: 20, title: '极寒之息' },
+    { name: '赤瞳挑战者', char: 'houndour', level: 24, title: '恶梦猎手' },
+    { name: '藤蔓园丁', char: 'bulbasaur', level: 21, title: '生生不息' },
+    { name: '熔火教头', char: 'charmander', level: 23, title: '烈焰冲锋' },
+    { name: '潮汐守卫', char: 'squirtle', level: 19, title: '不破之壳' },
+    { name: '影缝游侠', char: 'gastly', level: 25, title: '夜幕低语' },
+    { name: '砂砾行者', char: 'sandshrew', level: 20, title: '大地之牙' },
+    { name: '星屑占者', char: 'abra', level: 26, title: '念动风暴' }
+  ];
+
   window.DATA = {
     TYPE_COLORS: TYPE_COLORS,
     TYPE_CN: TYPE_CN,
@@ -298,6 +547,7 @@
     MEDALS: MEDALS,
     WILD: WILD,
     BOSSES: BOSSES,
+    PVP_RIVALS: PVP_RIVALS,
     UPGRADES: UPGRADES
   };
 })();

@@ -105,7 +105,7 @@
   /* ================= 屏幕管理 ================= */
   var STATE = 'charselect';
   function showScreen(id) {
-    ['screen-charselect', 'screen-region', 'screen-levelup', 'screen-pause', 'screen-over'].forEach(function (s) {
+    ['screen-charselect', 'screen-region', 'screen-levelup', 'screen-pause', 'screen-over', 'screen-duel', 'screen-board'].forEach(function (s) {
       $(s).classList.toggle('hidden', s !== id);
     });
     $('hud').classList.toggle('hidden', id !== null);
@@ -245,7 +245,7 @@
   /* ============================================================
      地区选择
      ============================================================ */
-  var rgIdx = 0, rgMode = 'classic', rgDiff = 0;
+  var rgIdx = 0, rgMode = 'classic', rgDiff = 0, rgTarget = 'pve';
   function renderRegionList() {
     var h = '';
     D.REGIONS.forEach(function (r, i) {
@@ -305,6 +305,14 @@
     });
   });
   $('btn-start-run').addEventListener('click', startRun);
+  Array.prototype.forEach.call($('target-row').children, function (b) {
+    b.addEventListener('click', function () {
+      rgTarget = b.dataset.target;
+      Array.prototype.forEach.call($('target-row').children, function (x) { x.classList.toggle('on', x === b); });
+      $('btn-start-run').innerHTML = rgTarget === 'pvp' ? '开战！<kbd>Enter</kbd>' : '出发！<kbd>Enter</kbd>';
+      sfx('click');
+    });
+  });
   $('btn-back-char').addEventListener('click', function () { STATE = 'charselect'; showScreen('screen-charselect'); });
   function gotoRegion() {
     STATE = 'regionselect';
@@ -340,6 +348,7 @@
   }
 
   function startRun() {
+    if (rgTarget === 'pvp') { startPvp(); return; }
     var c = D.CHARACTERS[csIdx], r = D.REGIONS[rgIdx], diff = D.DIFFICULTIES[rgDiff];
     RUN = {
       char: c, region: r, diff: diff, mode: rgMode,
@@ -374,6 +383,64 @@
     sfx('confirm');
     updateHudCoins();
     render();
+  }
+
+  /* ---------- PvP 镜像对决 / 排行榜 ---------- */
+  var PVP_LEVEL = { normal: 20, hard: 26, nightmare: 32 };
+  var boardMode = 'all', boardReturn = 'charselect';
+
+  function startPvp() {
+    var c = D.CHARACTERS[csIdx], diff = D.DIFFICULTIES[rgDiff];
+    var lvl = PVP_LEVEL[diff.id] || 20;
+    STATE = 'duel';
+    showScreen('screen-duel');
+    sfx('confirm');
+    DUEL.open(c, lvl, function () {
+      STATE = 'regionselect';
+      showScreen('screen-region');
+    });
+  }
+  function buildBoardTabs() {
+    var row = $('board-tabs');
+    if (!row || row.dataset.built === '1' || !window.LB) return;
+    row.dataset.built = '1';
+    row.innerHTML = LB.MODES.map(function (m) {
+      return '<button class="mode-btn' + (m.id === boardMode ? ' on' : '') + '" data-bm="' + m.id + '"><b>' + m.name + '</b></button>';
+    }).join('');
+    row.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('[data-bm]') : null;
+      if (!b) return;
+      boardMode = b.dataset.bm;
+      Array.prototype.forEach.call(row.children, function (x) { x.classList.toggle('on', x === b); });
+      LB.renderList($('board-list'), boardMode);
+      sfx('click');
+    });
+  }
+  function openBoard(ret) {
+    boardReturn = ret || 'charselect';
+    STATE = 'board';
+    showScreen('screen-board');
+    buildBoardTabs();
+    if (window.LB) LB.renderList($('board-list'), boardMode);
+    sfx('click');
+  }
+  function closeBoard() {
+    var r = boardReturn;
+    STATE = r === 'duel' ? 'duel' : (r === 'regionselect' ? 'regionselect' : (r === 'over' ? 'over' : 'charselect'));
+    showScreen(r === 'duel' ? 'screen-duel' : (r === 'regionselect' ? 'screen-region' : (r === 'over' ? 'screen-over' : 'screen-charselect')));
+  }
+  /* 结算：询问是否上传名字 */
+  function offerUpload() {
+    var box = $('upload-box');
+    if (!box || !RUN) return;
+    box.classList.add('hidden');
+    box.innerHTML = '';
+    if (!window.LB) return;
+    window.LB.renderPrompt(box, {
+      name: '', score: RUN.score, mode: RUN.mode,
+      char: RUN.char.id, level: RUN.player.level,
+      kills: RUN.kills, elapsed: Math.round(RUN.elapsed), diff: RUN.diff.id
+    }, function () { });
   }
 
   /* ---------- HUD 部件 ---------- */
@@ -1057,6 +1124,7 @@
     }).join('') : '<div class="dex-line"><span class="dx-c">本次没有新图鉴</span></div>';
     showScreen('screen-over');
     sfx(win ? 'win' : 'lose');
+    offerUpload();
   }
 
   /* ============================================================
@@ -1286,6 +1354,10 @@
       if (keyPressed('ArrowUp') || keyPressed('KeyW')) { rgDiff = (rgDiff + D.DIFFICULTIES.length - 1) % D.DIFFICULTIES.length; renderRegionDetail(); }
       if (keyPressed('Enter')) startRun();
       if (keyPressed('Escape')) { STATE = 'charselect'; showScreen('screen-charselect'); }
+    } else if (STATE === 'board') {
+      if (keyPressed('Escape')) closeBoard();
+    } else if (STATE === 'duel') {
+      if (keyPressed('Escape')) DUEL.close();
     } else if (STATE === 'playing') {
       if (keyPressed('Escape') || keyPressed('KeyP')) {
         STATE = 'paused';
@@ -1353,6 +1425,13 @@
     showScreen('screen-charselect');
     renderCharDetail(); renderRoster();
   });
+  /* 排行榜 / PvP 入口 */
+  if ($('btn-board-cs')) $('btn-board-cs').addEventListener('click', function () { openBoard('charselect'); });
+  if ($('btn-board-over')) $('btn-board-over').addEventListener('click', function () { openBoard('over'); });
+  if ($('btn-board-duel')) $('btn-board-duel').addEventListener('click', function () { openBoard('duel'); });
+  if ($('btn-board-back')) $('btn-board-back').addEventListener('click', closeBoard);
+  if ($('btn-duel-back')) $('btn-duel-back').addEventListener('click', function () { DUEL.close(); });
+  if ($('btn-duel-again')) $('btn-duel-again').addEventListener('click', function () { startPvp(); });
   $('ult-wrap').addEventListener('click', function () { if (STATE === 'playing') useUlt(); });
 
   /* ============================================================

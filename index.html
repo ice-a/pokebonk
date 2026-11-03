@@ -98,6 +98,7 @@
       </div>
     </div>
     <div class="cs-actions">
+      <button id="btn-board-cs">🏆 排行榜</button>
       <button class="primary big" id="btn-confirm-char">我选你了！<kbd>Enter</kbd></button>
     </div>
   </div>
@@ -122,6 +123,11 @@
             <button class="mode-btn" data-mode="survival"><b>生存模式</b><span>无限：宝可梦群与里程碑</span></button>
             <button class="mode-btn" data-mode="infinite"><b>无限流模式</b><span>AI 异象：奇遇与灾变轮番登场</span><em>AI</em></button>
           </div>
+          <div class="rg-label">对战目标</div>
+          <div class="mode-row" id="target-row">
+            <button class="mode-btn on" data-target="pve"><b>PvE · 宝可梦群</b><span>打野怪、守护者与圣地</span></button>
+            <button class="mode-btn" data-target="pvp"><b>PvP · 镜像对决</b><span>1v1 挑战排行榜玩家镜像</span></button>
+          </div>
           <div class="rg-label">难度</div>
           <div class="mode-row" id="diff-row"></div>
         </div>
@@ -133,6 +139,41 @@
     </div>
     <div class="rg-actions">
       <button class="primary big" id="btn-start-run">出发！<kbd>Enter</kbd></button>
+    </div>
+  </div>
+
+  <!-- ===================== PvP 镜像对决 ===================== -->
+  <div id="screen-duel" class="screen">
+    <div class="duel-wrap">
+      <div class="duel-head">
+        <h1 id="duel-title">镜像对决</h1>
+        <div class="dim" id="duel-sub"></div>
+      </div>
+      <div class="duel-stage">
+        <div class="duel-side" id="duel-my"></div>
+        <div class="duel-vs">VS</div>
+        <div class="duel-side" id="duel-rival"></div>
+      </div>
+      <div class="duel-log" id="duel-log"></div>
+      <div class="upload-box hidden" id="duel-result"></div>
+      <div class="duel-foot">
+        <button id="btn-duel-back">返回菜单</button>
+        <button id="btn-board-duel">🏆 排行榜</button>
+        <button class="primary" id="btn-duel-again">再战一局</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 排行榜 ===================== -->
+  <div id="screen-board" class="screen">
+    <div class="rg-head">
+      <button class="back-btn" id="btn-board-back"><kbd>Esc</kbd> 返回</button>
+      <h1>排行榜</h1>
+      <div class="rg-hint">按积分排序 · 前 50 · 本地与云端合并</div>
+    </div>
+    <div class="board-body">
+      <div class="mode-row" id="board-tabs"></div>
+      <div class="board-list" id="board-list"></div>
     </div>
   </div>
 
@@ -183,8 +224,10 @@
           <div class="oc-body" id="oc-dex"></div>
         </div>
       </div>
+      <div class="upload-box hidden" id="upload-box"></div>
       <div class="over-actions">
         <div class="keys"><kbd>Enter</kbd> 再来一次 · <kbd>Esc</kbd> 菜单</div>
+        <button id="btn-board-over">🏆 排行榜</button>
         <button id="btn-menu">菜单</button>
         <button class="primary" id="btn-retry">再来一次</button>
       </div>
@@ -204,6 +247,8 @@
 <script src="js/audio.js"></script>
 <script src="js/engine.js"></script>
 <script src="js/ai.js"></script>
+<script src="js/leaderboard.js"></script>
+<script src="js/duel.js"></script>
 <script src="js/game.js"></script>
 </body>
 </html>
