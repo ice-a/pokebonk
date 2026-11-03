@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+<meta name="theme-color" content="#0b1020" />
+<title>POKÉBONK · 宝可梦肉鸽</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+  <canvas id="game"></canvas>
+
+  <!-- ===================== 实战 HUD ===================== -->
+  <div id="hud" class="hidden">
+    <div class="hud-top">
+      <!-- 左：角色卡 -->
+      <div class="pcard">
+        <div class="pavatar" id="hud-avatar"></div>
+        <div class="pinfo">
+          <div class="pline">
+            <span class="pname" id="hud-name">杰尼龟</span>
+            <span class="ptype" id="hud-type">水</span>
+            <span class="evo-hint" id="hud-evohint">在 Lv.24 进化</span>
+          </div>
+          <div class="bar hp"><i id="hud-hpfill"></i><span id="hud-hptext">108 / 108</span></div>
+          <div class="bar xp"><i id="hud-xpfill"></i><span id="hud-xptext">0 / 6</span></div>
+        </div>
+        <div class="lvl-badge" id="hud-level">Lv.1</div>
+      </div>
+
+      <!-- 中：地区/区域/计时 -->
+      <div class="hud-mid">
+        <div class="region-line">
+          <div class="region-name" id="hud-region">青翠森林</div>
+          <div class="area-track" id="hud-areatrack"></div>
+          <div class="region-sub">
+            <span id="hud-area">区域 1/3</span>
+            <span class="diff-badge" id="hud-diff">普通</span>
+          </div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-count" id="hud-timer">10:00</div>
+          <div class="timer-elapsed" id="hud-elapsed">0:00.0 · 本地图暂无纪录</div>
+        </div>
+        <div class="coin-line">
+          <span class="chip coin"><span class="ic">₽</span><b id="hud-coins">0</b><em>你的宝可币</em></span>
+          <span class="chip ballprice"><span class="ic ball"></span><b id="hud-ballprice">18</b><em>下一个精灵球 · 会涨价</em></span>
+        </div>
+      </div>
+
+      <!-- 右：小地图 + 击败 -->
+      <div class="hud-right">
+        <canvas id="minimap" width="150" height="150"></canvas>
+        <div class="chip kills"><span class="ic">✦</span><b id="hud-kills">0</b></div>
+        <div class="hud-btns">
+          <button id="btn-mute" class="icon-btn" title="静音 (M)">🔊</button>
+          <button id="btn-pause" class="icon-btn" title="暂停 (P)">⏸</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部：招式槽 + 终极技 -->
+    <div class="hud-bottom">
+      <div id="moves" class="moves"></div>
+      <div class="ult-wrap" id="ult-wrap" title="终极技 (R)">
+        <div class="ult-ring" id="ult-ring"><i id="ult-fill"></i></div>
+        <div class="ult-label"><b id="ult-name">贝壳旋风</b><span class="ult-key">R</span></div>
+      </div>
+    </div>
+
+    <div class="bossbar hidden" id="bossbar"><i id="bossbar-fill"></i><span id="bossbar-name">BOSS</span></div>
+    <div class="party" id="party"></div>
+    <div class="banner" id="banner"><b id="banner-txt"></b><small id="banner-sub"></small></div>
+    <div class="vignette" id="vignette"></div>
+  </div>
+
+  <!-- ===================== 角色选择 ===================== -->
+  <div id="screen-charselect" class="screen">
+    <div class="cs-head">
+      <div class="logo"><span class="logo-ball"></span><span class="logo-txt">POKÉ<span>BONK</span></span></div>
+      <div class="cs-title">选择你的宝可梦 <em id="cs-progress">1/6</em></div>
+    </div>
+    <div class="cs-body">
+      <!-- 左：详情卡 -->
+      <div class="cs-detail" id="cs-detail"></div>
+      <!-- 右：联盟图鉴 -->
+      <div class="cs-roster">
+        <div class="cs-tabs">
+          <button class="tab on" data-tab="all">全部</button>
+          <button class="tab" data-tab="mine">在我的联盟中</button>
+          <button class="cs-random" id="cs-random">🎲 随机</button>
+        </div>
+        <div class="roster-grid" id="roster-grid"></div>
+        <div class="cs-foot">
+          <span class="fav-line">收藏夹 <b id="fav-count">0</b>/6</span>
+        </div>
+      </div>
+    </div>
+    <div class="cs-actions">
+      <button class="primary big" id="btn-confirm-char">我选你了！<kbd>Enter</kbd></button>
+    </div>
+  </div>
+
+  <!-- ===================== 地区选择 ===================== -->
+  <div id="screen-region" class="screen">
+    <div class="rg-head">
+      <button class="back-btn" id="btn-back-char"><kbd>Esc</kbd> 返回</button>
+      <h1>选择地区</h1>
+      <div class="rg-hint">← → 地区 · ↑ ↓ 难度 · <kbd>Enter</kbd> 开始</div>
+    </div>
+    <div class="rg-body">
+      <div class="rg-list" id="region-list"></div>
+      <div class="rg-detail">
+        <div class="rg-info" id="region-info"></div>
+        <div class="rg-my" id="region-my"></div>
+        <div class="rg-guardians" id="region-guardians"></div>
+        <div class="rg-mode">
+          <div class="rg-label">模式</div>
+          <div class="mode-row" id="mode-row">
+            <button class="mode-btn on" data-mode="classic"><b>经典模式</b><span>区域、守护者和圣地</span></button>
+            <button class="mode-btn" data-mode="survival"><b>生存模式</b><span>无限：宝可梦群与里程碑</span></button>
+          </div>
+          <div class="rg-label">难度</div>
+          <div class="mode-row" id="diff-row"></div>
+        </div>
+        <div class="rg-medals">
+          <div class="rg-label">计时赛 · <span id="medal-diff">普通</span></div>
+          <div class="medal-row" id="medal-row"></div>
+        </div>
+      </div>
+    </div>
+    <div class="rg-actions">
+      <button class="primary big" id="btn-start-run">出发！<kbd>Enter</kbd></button>
+    </div>
+  </div>
+
+  <!-- ===================== 升级选卡 ===================== -->
+  <div id="screen-levelup" class="screen">
+    <div class="lu-head">
+      <div class="lu-title">LEVEL UP!</div>
+      <div class="lu-sub" id="lu-sub">选择一项强化</div>
+    </div>
+    <div class="cards" id="card-list"></div>
+  </div>
+
+  <!-- ===================== 暂停 ===================== -->
+  <div id="screen-pause" class="screen">
+    <div class="panel">
+      <h2>暂停</h2>
+      <p class="dim">喘口气。外面还有宝可梦群在等你。</p>
+      <div class="row">
+        <button class="primary" id="btn-resume">继续</button>
+        <button id="btn-quit">放弃本局</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 结算 ===================== -->
+  <div id="screen-over" class="screen">
+    <div class="over-wrap">
+      <div class="over-banner" id="over-banner">
+        <div class="ob-avatar" id="ob-avatar"></div>
+        <div class="ob-main">
+          <div class="ob-sub" id="ob-sub">青翠森林 · 区域 1 · 普通</div>
+          <h2 id="over-title">你倒下了！</h2>
+          <div class="ob-name" id="ob-name">杰尼龟</div>
+        </div>
+        <div class="ob-chips" id="ob-chips"></div>
+      </div>
+      <div class="over-cols">
+        <div class="oc-card oc-yellow">
+          <div class="oc-head">成绩</div>
+          <div class="oc-body" id="oc-rank"></div>
+        </div>
+        <div class="oc-card oc-green">
+          <div class="oc-head">你的游戏</div>
+          <div class="oc-body" id="oc-run"></div>
+        </div>
+        <div class="oc-card oc-blue">
+          <div class="oc-head">图鉴 <em id="oc-dex-sub"></em></div>
+          <div class="oc-body" id="oc-dex"></div>
+        </div>
+      </div>
+      <div class="over-actions">
+        <div class="keys"><kbd>Enter</kbd> 再来一次 · <kbd>Esc</kbd> 菜单</div>
+        <button id="btn-menu">菜单</button>
+        <button class="primary" id="btn-retry">再来一次</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 触屏 ===================== -->
+  <div id="touch" class="hidden">
+    <div id="joy"><div id="joyknob"></div></div>
+    <button id="btn-ball">球</button>
+    <button id="btn-ult">R</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
