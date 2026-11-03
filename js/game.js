@@ -1299,6 +1299,7 @@
           }
         } catch (e) { }
       }
+      if (window.AIEvent && window.AIEvent.tick) window.AIEvent.tick(RUN, dt);
       updateRun(dt);
       render();
     } else if (STATE === 'paused') {
@@ -1370,4 +1371,44 @@
   renderCharDetail();
   renderRoster();
   requestAnimationFrame(frame);
+
+  /* ============================================================
+     AI 无限流挂钩（ai-infinite 分支）
+     js/ai.js 通过 window.PB 读取对局状态并施加事件效果。
+     ============================================================ */
+  window.PB = {
+    state: function () {
+      if (!RUN || !RUN.player) return {};
+      return {
+        level: RUN.player.level, kills: RUN.kills, coins: RUN.coinVal,
+        hp: Math.round(RUN.player.hp), maxHp: RUN.player.stats.maxHp,
+        mode: RUN.mode, area: RUN.area, elapsed: Math.round(RUN.elapsed)
+      };
+    },
+    addCoins: function (v) {
+      if (!RUN) return;
+      RUN.coinVal += v; RUN.coinsEarned += v;
+      updateHudCoins();
+    },
+    heal: function (v) {
+      if (!RUN || !RUN.player) return;
+      var p = RUN.player;
+      p.hp = Math.min(p.stats.maxHp, p.hp + v);
+    },
+    damageAll: function (v) {
+      if (!RUN) return;
+      RUN.enemies.slice().forEach(function (e) { damageEnemy(e, v); });
+    },
+    xp: function (v) { if (RUN) gainXp(v); },
+    wave: function (v) { if (RUN) spawnWild(v); },
+    blessing: function (v) {
+      if (!RUN || !RUN.player) return;
+      var p = RUN.player, mul = 1 + (v || 15) / 100;
+      p.moveDmgMul *= mul;
+      setTimeout(function () {
+        if (RUN && RUN.player === p) p.moveDmgMul /= mul;
+      }, 15000);
+    },
+    banner: function (t, s) { banner(t, s); }
+  };
 })();
